@@ -26,12 +26,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up JDK 21
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'
+          java-version: '17'
+          distribution: 'corretto'
           cache: maven
+      - name: Run Maven Tests
+        run: mvn test
       - name: Build with Maven
         uses: RodrigoFMC/academy/.github/actions/maven_build@main
       - name: Build and Create Docker Image
