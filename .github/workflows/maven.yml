@@ -41,7 +41,7 @@ jobs:
           image_name: academy
           tag_name: latest
       - name: Push Docker Image to Docker Hub
-        uses: RodrigoFMC/academy/.github/actions/custom_action@main
+        uses: RodrigoFMC/academy/.github/actions/docker_push@main
         with:
           docker_username: ${{ secrets.DOCKER_USERNAME }}
           docker_token: ${{ secrets.DOCKER_TOKEN }}
