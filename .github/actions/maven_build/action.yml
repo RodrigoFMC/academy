@@ -8,6 +8,17 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Start PostgreSQL Service
+      run: |
+        docker run --name postgres -e POSTGRES_DB=mydatabase -e POSTGRES_USER=myuser -e POSTGRES_PASSWORD=mypassword -d -p 5432:5432 postgres:latest
+      shell: bash
+    - name: Wait for PostgreSQL to be ready
+      run: |
+        until docker exec postgres pg_isready; do
+          echo "Waiting for PostgreSQL to be ready..."
+          sleep 2
+        done
+      shell: bash
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       shell: bash
