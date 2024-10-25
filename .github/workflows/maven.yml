@@ -32,7 +32,9 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-      - name: Build and Create Docker Image
+      - name: Build with Maven
         uses: RodrigoFMC/academy/.github/actions/maven_build@main
+      - name: Build and Create Docker Image
+        uses: RodrigoFMC/academy/.github/actions/docker_build@main
         with:
           dockerfile_path: src/main/docker/Dockerfile.jvm
