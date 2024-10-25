@@ -8,9 +8,21 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    services:
+          postgres:
+            image: postgres:latest
+            env:
+              POSTGRES_USER: postgresuser
+              POSTGRES_PASSWORD: mysecretpassword
+              POSTGRES_DB: postgres
+            ports:
+              - 5432:5432
+            options: >-
+              --health-cmd "pg_isready -U postgres"
+              --health-interval 10s
+              --health-timeout 5s
+              --health-retries 5
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
@@ -21,8 +33,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Build Docker Image
+    - name: Build Dockerfile
       run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
     - name: list docker images 
       run: docker images
+
 
