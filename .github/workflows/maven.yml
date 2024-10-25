@@ -38,3 +38,5 @@ jobs:
         uses: RodrigoFMC/academy/.github/actions/docker_build@main
         with:
           dockerfile_path: src/main/docker/Dockerfile.jvm
+          image_name: academy
+          tag_name: latest
