@@ -19,6 +19,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build and Create Docker Image
-      uses: {{RodrigoFMC}}/{{academy}}/.github/actions/maven_build@main
+      uses: RodrigoFMC/academy/.github/actions/maven_build@main
       with:
         dockerfile_path: src/main/docker/Dockerfile.jvm
